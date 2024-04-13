@@ -246,7 +246,7 @@ namespace Utilities
 			if ((sourceFile == NULL) || (destFile == NULL))
 				return false;
 
-			while (size = fread(buffer, 1, bufferSize, sourceFile))
+			while ((size = fread(buffer, 1, bufferSize, sourceFile)))
 			{
 				fwrite(buffer, 1, size, destFile);
 			}
