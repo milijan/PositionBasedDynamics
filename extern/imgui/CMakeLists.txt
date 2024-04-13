@@ -32,6 +32,10 @@ target_compile_definitions(imgui PUBLIC -DIMGUI_IMPL_OPENGL_LOADER_GLAD)
 add_dependencies(imgui glfw)
 target_link_libraries(imgui PUBLIC glfw)
 
-target_include_directories(glfw PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+if (DEFINED GLFW_INCLUDE_DIR)
+  target_include_directories(glfw INTERFACE ${CMAKE_CURRENT_LIST_DIR})
+else()
+  target_include_directories(glfw PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+endif()
 set_target_properties(imgui PROPERTIES FOLDER "External Dependencies")
 
