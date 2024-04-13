@@ -122,7 +122,7 @@ void MD5::update(FILE *file){
   unsigned char buffer[1024];
   int len;
 
-  while (len=(int) fread(buffer, 1, 1024, file))
+  while ((len=(int) fread(buffer, 1, 1024, file)))
 	update(buffer, len);
 
   fclose (file);
@@ -271,11 +271,11 @@ char *MD5::hex_digest(){
   if (!finalized){
 	cerr << "MD5::hex_digest:  Can't get digest if you haven't "<<
 	  "finalized the digest!" <<endl;
-	return "";
+	return ( (char*) "");
   }
 
   for (i=0; i<16; i++)
-	sprintf(s+i*2, "%02x", digest[i]);
+	snprintf(s+i*2, 2, "%02x", digest[i]);
 
   s[32]='\0';
 
